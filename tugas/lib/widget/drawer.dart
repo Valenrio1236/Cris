@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tugas/screen/beranda.dart';
 import 'package:tugas/screen/home.dart';
+import 'package:tugas/widget/languageBody.dart';
 import 'package:tugas/widget/movieBody.dart';
 import 'package:tugas/widget/settingBody.dart';
+import 'package:tugas/widget/subscriptionBody.dart';
 
 class Drawers extends StatelessWidget {
   Drawers({super.key, required this.user});
@@ -75,6 +77,32 @@ class Drawers extends StatelessWidget {
             leading: Icon(Icons.movie),
             title: Text(
               "Movies",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Subscription(user: user)),
+              );
+            },
+            leading: Icon(Icons.subscriptions_rounded),
+            title: Text(
+              "Subscription",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Language(user: user)),
+              );
+            },
+            leading: Icon(Icons.language),
+            title: Text(
+              "Subtitle",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

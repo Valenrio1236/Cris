@@ -13,6 +13,8 @@ class _SignupState extends State<Signup> {
   final TextEditingController _username = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  
+  int _age = 20;
 
   bool already = false;
   bool registered = false;
@@ -31,6 +33,7 @@ class _SignupState extends State<Signup> {
       "username": _username.text,
       "email": _email.text,
       "password": _password.text,
+      "age": _age,
     });
 
     _username.clear();
@@ -107,6 +110,30 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               controller: _username,
+            ),
+            SizedBox(height: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Age: $_age',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                Slider(
+                  value: _age.toDouble(),
+                  min: 0,
+                  max: 100,
+                  divisions: 100,
+                  label: _age.toString(),
+                  onChanged: (double value) {
+                    setState(() {
+                      _age = value.toInt();
+                    });
+                  },
+                ),
+              ],
             ),
             SizedBox(height: 20),
             TextField(

@@ -17,6 +17,8 @@ class _FilmDetailState extends State<FilmDetail> {
   bool like = false;
   int dislikeCount = Random().nextInt(100);
   bool dislike = false;
+  bool isDownloading = false;
+  double downloadProgress = 0.0;
 
   void incrementLike() {
     setState(() {
@@ -39,6 +41,24 @@ class _FilmDetailState extends State<FilmDetail> {
         dislikeCount -= 1;
         dislike = false;
       }
+    });
+  }
+
+  void startDownload() async {
+    setState(() {
+      isDownloading = true;
+      downloadProgress = 0.0;
+    });
+
+    for (int i = 0; i <= 10; i++) {
+      await Future.delayed(Duration(milliseconds: 800));
+      setState(() {
+        downloadProgress = i / 10;
+      });
+    }
+
+    setState(() {
+      isDownloading = false;
     });
   }
 
@@ -68,6 +88,16 @@ class _FilmDetailState extends State<FilmDetail> {
         ],
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),
+        bottom: isDownloading
+            ? PreferredSize(
+                preferredSize: Size.fromHeight(4.0),
+                child: LinearProgressIndicator(
+                  value: downloadProgress,
+                  backgroundColor: const Color.fromARGB(255, 98, 98, 98),
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : null,
       ),
       backgroundColor: Color.fromARGB(220, 0, 0, 0),
       body: Padding(
@@ -126,9 +156,7 @@ class _FilmDetailState extends State<FilmDetail> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            onPressed: () {
-                              incrementLike();
-                            },
+                            onPressed: incrementLike,
                             child: Row(
                               children: [
                                 Icon(
@@ -137,9 +165,7 @@ class _FilmDetailState extends State<FilmDetail> {
                                       : Icons.thumb_up_alt_outlined,
                                   color: Colors.white,
                                 ),
-                                SizedBox(
-                                  width: 2,
-                                ),
+                                SizedBox(width: 2),
                                 Text(
                                   "($likeCount)",
                                   style: TextStyle(
@@ -157,9 +183,7 @@ class _FilmDetailState extends State<FilmDetail> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            onPressed: () {
-                              incrementDislike();
-                            },
+                            onPressed: incrementDislike,
                             child: Row(
                               children: [
                                 Icon(
@@ -168,9 +192,7 @@ class _FilmDetailState extends State<FilmDetail> {
                                       : Icons.thumb_down_alt_outlined,
                                   color: Colors.white,
                                 ),
-                                SizedBox(
-                                  width: 2,
-                                ),
+                                SizedBox(width: 2),
                                 Text(
                                   "($dislikeCount)",
                                   style: TextStyle(
@@ -181,6 +203,32 @@ class _FilmDetailState extends State<FilmDetail> {
                             ),
                           ),
                         ],
+                      ),
+                      SizedBox(height: 10),
+                      SizedBox(
+                        width: 215,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: isDownloading ? null : startDownload,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.download, color: Colors.white,),
+                              SizedBox(width: 8),
+                              Text(
+                                "Download",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),

@@ -3,6 +3,7 @@ class Poster{
   String name;
   String genre;
   String year;
+  String sinopsis;
 
 
   Poster({
@@ -10,5 +11,6 @@ class Poster{
     required this.name,
     required this.genre,
     required this.year,
+    required this.sinopsis,
   });
 }

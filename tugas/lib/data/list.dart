@@ -4,13 +4,13 @@ List<Map<String, dynamic>> list =[
     "name": "Shang-Chi",
     "genre": "Laga, Petualangan",
     "year": "2021",
-    "Sinopsis": "Shang-Chi (Simu Liu) harus menghadapi masa lalunya sebelum ia memilih untuk meninggalkan dan bergabung ke dalam sebuah organisasi bernama Ten Rings."
+    "sinopsis": "Shang-Chi (Simu Liu) harus menghadapi masa lalunya sebelum ia memilih untuk meninggalkan dan bergabung ke dalam sebuah organisasi bernama Ten Rings."
 },{
     "url": "https://play-lh.googleusercontent.com/a3yOEm1lYpHlFYfGAKV0E-RT90w9ibf6vyIF3Bs8K_IJV2BmYPaUortb6DWbG9ivBizHjbImXBvFFKnxbg",
     "name": "Godzilla VS Kong",
     "genre": "Laga, Fiksi Ilmiah",
     "year": "2021",
-    "Sinopsis": "Sebuah pertarungan epic dalam sinematik Monsterverse antara Godzilla dan Kong.Pertarungan Godzilla vs. Kong membuat umat manusia harus bertahan dengan berbagai cara. Salah satunya adalah memusnahkan kedua raksasa tersebut.Siapa yang akan menang?"
+    "sinopsis": "Sebuah pertarungan epic dalam sinematik Monsterverse antara Godzilla dan Kong.Pertarungan Godzilla vs. Kong membuat umat manusia harus bertahan dengan berbagai cara. Salah satunya adalah memusnahkan kedua raksasa tersebut.Siapa yang akan menang?"
 },{
     "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSSEWudOgw_33ZxlfZJr8sdbpmju-t1n0tzxdXgCnrPADO46nOt",
     "name": "Shazam! Fury of the Gods",

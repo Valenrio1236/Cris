@@ -12,7 +12,8 @@ class Posters{
         url: poster["url"],
         name: poster["name"],
         genre: poster["genre"],
-        year: poster["year"]
+        year: poster["year"],
+        sinopsis: poster["sinopsis"],
       ))
     ];
   }

@@ -1,88 +1,42 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:tugas/models/posters.dart';
-import 'package:tugas/screen/eksplorasi.dart';
-import 'package:tugas/widget/posterCard.dart';
+import 'package:tugas/utills/nav.dart';
+import 'package:tugas/widget/botNav.dart';
 
-class Beranda extends StatelessWidget {
-  Beranda({super.key});
+class Beranda extends StatefulWidget {
+  const Beranda({super.key});
 
-  final Posters _poster = Posters();
+  @override
+  State<Beranda> createState() => _BerandaState();
+}
+
+class _BerandaState extends State<Beranda> {
+  int _currentIndex = 0;
+
+  void moveNav(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  List<String> title = ["Home", "Search", "Favorite"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            Image(
-                image: AssetImage('assets/logo.png'),
-                height: 40,
-                fit: BoxFit.cover),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Pouki',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
-                ),
-                Text(
-                  'Stream',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
-                ),
-              ],
-            ),
-          ],
-        ),
+        centerTitle: true,
+        title: Text(title[_currentIndex],
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold
+        ),),
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),
-        actions: [
-            IconButton(
-              icon: Icon(Icons.search),
-              color: Colors.white,
-              onPressed: () {
-                Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Eksplorasi()),
-                        );
-              },
-            ),
-          ],
       ),
       backgroundColor: Color.fromARGB(220, 0, 0, 0),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            Image.network(
-              'https://i.ebayimg.com/images/g/GtEAAOSw1W9eN1cY/s-l1600.jpg',
-              fit: BoxFit.cover,
-              height: 300,
-            ),
-            SizedBox(height: 20),
-            Text("Trending", style: TextStyle(color: Colors.grey, fontSize: 20, fontWeight: FontWeight.w900)),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  childAspectRatio: 1 / 1.5,
-                ),
-                itemCount: _poster.posters.length,
-                itemBuilder: (context, index) {
-                  final poster = _poster.posters[index];
-                  return PosterCard(poster: poster);
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );          
+      body: bodyContent[_currentIndex],
+      bottomNavigationBar: BotNav(moveNav: moveNav),
+    );
   }
 }

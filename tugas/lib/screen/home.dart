@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:tugas/screen/login.dart';
 import 'package:tugas/screen/singup.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  bool switchValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +61,37 @@ class Home extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Center(
-                child: Text("Welcome to POUKI STREAM",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
-                      color: Colors.white,
-                    )),
+                child: Column(
+                  children: [
+                    Text("Welcome to POUKI STREAM",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                          color: Colors.white,
+                        )),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Switch(
+                          value: switchValue,
+                          onChanged: (value) {
+                            setState(() {
+                              switchValue = value;
+                            });
+                          },
+                        ),
+                        Text(
+                          "Are you ready to stream?",
+                          style: TextStyle(
+                              color: const Color.fromARGB(255, 196, 196, 196)),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
               Expanded(
                 child: Column(
@@ -69,34 +101,43 @@ class Home extends StatelessWidget {
                       width: 500,
                       height: 40,
                       child: ElevatedButton(
-                      child: Text('Login', style: TextStyle(color: Colors.black),),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        child: Text(
+                          'Login',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: switchValue
+                            ? () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Login()),
+                                );
+                              }
+                            : null,
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Login()),
-                        );
-                      },
-                    ),
                     ),
                     SizedBox(height: 8),
                     SizedBox(
                       width: 500,
                       height: 40,
                       child: ElevatedButton(
-                      child: Text('Sign Up'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
+                        child: Text('Sign Up'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                        ),
+                        onPressed: switchValue
+                            ? () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Signup()),
+                                );
+                              }
+                            : null,
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Signup()),
-                        );
-                      },
-                    ),
                     ),
                   ],
                 ),

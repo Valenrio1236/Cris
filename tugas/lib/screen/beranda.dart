@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tugas/utills/nav.dart';
 import 'package:tugas/widget/botNav.dart';
+import 'package:tugas/widget/drawer.dart';
 
 class Beranda extends StatefulWidget {
-  const Beranda({super.key});
+  Beranda({super.key, required this.user});
+
+  Map<String, dynamic> user;
 
   @override
   State<Beranda> createState() => _BerandaState();
@@ -25,15 +28,15 @@ class _BerandaState extends State<Beranda> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(title[_currentIndex],
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        ),),
+        title: Text(
+          title[_currentIndex],
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),
       ),
+      drawer: Drawers(user: widget.user),
       backgroundColor: Color.fromARGB(220, 0, 0, 0),
       body: bodyContent[_currentIndex],
       bottomNavigationBar: BotNav(moveNav: moveNav),

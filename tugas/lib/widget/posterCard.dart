@@ -31,15 +31,17 @@ class PosterCard extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            Text(poster.name,
+             Padding(padding: EdgeInsets.only(left: 4),
+            child: Text(poster.name,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
-                style: TextStyle(color: Colors.white)),
-            Text(
+                style: TextStyle(color: Colors.white)),),
+            Padding(padding: EdgeInsets.only(left: 4),
+            child:  Text(
               poster.year,
               maxLines: 1,
               style: TextStyle(color: Color.fromARGB(255, 154, 154, 154)),
-            )
+            ),)
           ],
         ),
       ),

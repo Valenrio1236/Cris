@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Row(
+          title: const Row(
             children: [
               Image(
                   image: AssetImage('assets/logo.png'),

@@ -12,5 +12,5 @@ class Poster{
     required this.genre,
     required this.year,
     required this.sinopsis,
-  });
+      });
 }

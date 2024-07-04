@@ -1,14 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:tugas/data/user.dart';
 import 'package:tugas/screen/beranda.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
+  bool isLogin = true;
+
+  void _login(BuildContext ctx) {
+    List<Map<String, dynamic>> accountExist =
+        listUsers.where((user) => user["email"] == _email.text).toList();
+
+    if (accountExist.isNotEmpty) {
+      Map<String, dynamic> account = accountExist[0];
+
+      if (account["email"] == _email.text &&
+          account["password"] == _password.text) {
+        Navigator.of(ctx).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => Beranda(user: account,),
+            ),
+            (route) => false);
+
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Login berhasil!")));
+        return;
+      }
+    }
+
+    setState(() {
+      isLogin = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Row(
+          title: const Row(
             children: [
               Image(
                   image: AssetImage('assets/logo.png'),
@@ -44,7 +81,7 @@ class Login extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Login",
+                const Text("Login",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
@@ -53,13 +90,14 @@ class Login extends StatelessWidget {
                 SizedBox(height: 20),
                 TextField(
                   decoration: InputDecoration(
-                    hintText: 'Username',
+                    hintText: 'Email',
                     fillColor: Colors.white,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
+                  controller: _email,
                 ),
                 SizedBox(height: 20),
                 TextField(
@@ -72,16 +110,22 @@ class Login extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
+                  controller: _password,
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  height: 30,
+                  child: Text(
+                    isLogin ? "" : "Email / Password Salah",
+                    style: const TextStyle(color: Colors.red, fontSize: 15),
+                  ),
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Beranda()),
-                    );
+                    _login(context);
                   },
-                  child: Text('Submit'),
+                  child: const Text('Submit'),
                 ),
               ],
             )));
